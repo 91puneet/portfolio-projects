@@ -1,4 +1,13 @@
--- Switch to host_agent database is assumed done by psql -d host_agent
+-- Fail fast if not connected to the expected database (PostgreSQL doesn't support `USE dbname`)
+DO $$
+BEGIN
+  IF current_database() <> 'host_agent' THEN
+    RAISE EXCEPTION
+      'You must connect to host_agent database before running this script. Example: psql -d host_agent -f linux_sql/scripts/sql/ddl.sql';
+  END IF;
+END
+$$;
+
 -- Create host_info table if it does not exist
 CREATE TABLE IF NOT EXISTS host_info
 (
@@ -25,4 +34,3 @@ CREATE TABLE IF NOT EXISTS host_usage
     disk_available INT4 NOT NULL,
     CONSTRAINT host_usage_host_info_fk FOREIGN KEY (host_id) REFERENCES host_info(id)
 );
-
