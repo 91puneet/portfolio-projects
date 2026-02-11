@@ -1,10 +1,16 @@
+
+
+-- Switch to host_agent database
+\c host_agent;
+
 -- Fail fast if not connected to the expected database (PostgreSQL doesn't support `USE dbname`)
 DO $$
 BEGIN
   IF current_database() <> 'host_agent' THEN
     RAISE EXCEPTION
       'You must connect to host_agent database before running this script. Example: psql -d host_agent -f linux_sql/scripts/sql/ddl.sql';
-  END IF;
+\c host_agent 
+END IF;
 END
 $$;
 
