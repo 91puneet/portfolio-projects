@@ -44,6 +44,7 @@ The PostgreSQL database is deployed inside a Docker container and managed using 
 The system follows a centralized monitoring architecture. Multiple Linux hosts act as monitoring agents, each collecting local system metrics. All collected data is sent to a centralized PostgreSQL database running in a Docker container. This design allows administrators to query and analyze metrics across multiple hosts from a single data source.
 
 An architectural diagram illustrating three Linux hosts, monitoring agents, and a centralized PostgreSQL database is stored in the assets directory.
+![Cluster Architecture](../assets/cluster_diagram.png)
 
 ## Scripts
 
